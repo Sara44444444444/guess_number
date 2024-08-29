@@ -4,7 +4,6 @@ root = Tk()
 root.geometry("1920x1080")  # Set the window size
 root.configure(bg="light blue")  # Set the background color
 
-
 # creating a Label Widget
 myLabel1 = Label(root, text="Guess My Number", font=("Helvetica", 16, "bold"), fg="blue")
 myLabel2 = Label(root, text="Guess a random number", font=("Helvetica", 15, "bold"), fg="blue")
@@ -24,6 +23,13 @@ button = Button(root, text="New target", fg="blue", bg="light blue")
 entry1.grid(row=2, column=0)
 entry2.grid(row=2, column=1)
 button.grid(row=2, column=2)
+
+# creating myLabel3
+myLabel3 = Label(root, text="Please guess a number, enter it, and press guess:")
+myLabel3.grid(row=3, column=0)
+# creating a Button for myLabel3
+button1 = Button(root, text="Guess")
+button1.grid(row=3, column=1)
 
 # Running the main loop
 root.mainloop()
