@@ -1,5 +1,6 @@
 from tkinter import *  # Import all classes and functions from the tkinter module
 import random  # Import the random module to generate random numbers
+from PIL import Image, ImageTk
 
 target_number = None  # Initialize the target number variable to None
 
@@ -9,7 +10,8 @@ def Guess():
     global target_number  # Use the global target_number variable
 
     if target_number is None:  # Check if the target number has not been set
-        resultLabel.config(text="please first click the button New target ")  # Prompt the user to set a new target number
+        resultLabel.config(
+            text="please first click the button New target ")  # Prompt the user to set a new target number
         return  # Exit the function
     if num > target_number:  # If the guessed number is greater than the target number
         resultLabel.config(text="My number is less")  # Inform the user that the target number is smaller
@@ -27,20 +29,20 @@ def set_new_target():
     print(target_number)  # Print the generated random number for debugging purposes
 
 
+
 root = Tk()  # Create the main window
 root.geometry("1920x1080")  # Set the window size
-root.configure(bg="light blue")  # Set the background color
+root.configure(bg="#FFA500")  # Set the background color
+root.title("Guess My Number")
 
-# Creating a Frame with a border
-border_frame = Frame(root, borderwidth=5, relief="ridge", bg="light blue")  # Create a frame with a border and light blue background
-border_frame.pack(fill="both", expand=True, padx=10, pady=10)  # Pack the frame with padding
-
-GuessMyNumber = Label(border_frame, text="Guess My Number", font=("arial", 16, "bold"), bg="light blue")  # Create a label with the title
+GuessMyNumber = Label(root, text="Guess My Number", font=("arial", 46, "bold"), fg="#5677fc",
+                      bg="#FFA500")  # Create a label with the title
 GuessMyNumber.pack()  # Pack the label
-myLabel2 = Label(border_frame, text="Guess a random number", bg="light blue")  # Create a label with instructions
+myLabel2 = Label(root, text="Guess a random number", font=("arial", 36, "bold"), fg="#03a9fa",
+                 bg="#FFA500")  # Create a label with instructions
 myLabel2.pack()  # Pack the label
 
-frame = Frame(border_frame, bg="light blue")  # Create another frame for the input fields
+frame = Frame(root, bg="light blue")  # Create another frame for the input fields
 frame.pack(pady=10)  # Pack the frame with padding
 
 lowNumberEntry = Entry(frame, width=10)  # Create an entry widget for the lower bound
@@ -49,13 +51,15 @@ lowNumberEntry.insert(0, str(1))  # Insert the default value of 1
 highNumberEntry = Entry(frame, width=10)  # Create an entry widget for the upper bound
 highNumberEntry.pack(side=LEFT, padx=10)  # Pack the entry widget with padding
 highNumberEntry.insert(0, str(100))  # Insert the default value of 100
-buttonSetNewTarget = Button(frame, text="New Target", bg="light blue", fg="dark blue", command=set_new_target)  # Create a button to set a new target number
+buttonSetNewTarget = Button(frame, text="New Target", bg="light blue", fg="dark blue",
+                            command=set_new_target)  # Create a button to set a new target number
 buttonSetNewTarget.pack(side=LEFT, padx=10)  # Pack the button with padding
 
-resultLabel = Label(border_frame, text="Please guess a number, enter it and press guess:", bg="light yellow")  # Create a label to display the result
+resultLabel = Label(root, text="Please guess a number, enter it and press guess:", font=("arial", 16, "bold"),
+                    fg="#2923A0", bg="#ffeb3b")  # Create a label to display the result
 resultLabel.pack()  # Pack the label
 
-frame1 = Frame(border_frame, bg="light blue")  # Create another frame for the guess input
+frame1 = Frame(root, bg="light blue")  # Create another frame for the guess input
 frame1.pack(pady=12)  # Pack the frame with padding
 
 entryGuessNumber = Entry(frame1, width=10)  # Create an entry widget for the user's guess
@@ -63,5 +67,17 @@ entryGuessNumber.pack(side=LEFT, padx=10)  # Pack the entry widget with padding
 buttonGuess = Button(frame1, text="Guess", command=Guess)  # Create a button to submit the guess
 buttonGuess.pack(side=LEFT, padx=10)  # Pack the button with padding
 
+framephoto = Frame(root, )
+framephoto.pack(pady= 10)
+framephoto.place(relx=0.5,rely= 0.7, anchor=CENTER)
+
+photooriginal = Image.open("image_guess.png")
+resizephoto = photooriginal.resize((300, 300))
+tkphoto = ImageTk.PhotoImage(resizephoto)
+
+photo = PhotoImage(file="image_guess.png")
+photoLabel = Label(framephoto, image= tkphoto)
+#photoLabel.place(x=10, y=20)  # place the image at (10, 20) coordinates
+photoLabel.pack()
 # Running the main loop
 root.mainloop()  # Start the main event loop
